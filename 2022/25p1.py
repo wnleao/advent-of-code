@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+import input
 
 # 2, 1, 0, minus (written -), and double-minus (written =)
 # minus = -1 and double-minus = -2
@@ -34,17 +34,4 @@ def solve(content: list[str]) -> str:
 
 
 if __name__ == '__main__':
-    # TODO: boilerplate code, move to common file
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input',
-                        required=True,
-                        default=None,
-                        help='puzzle input filepath (e.g.: "input.txt" or "example.txt")')
-    args = parser.parse_args()
-
-    with open(args.input, 'r') as f:
-        content = f.read().splitlines()
-
-    print(solve(content))
+    print(solve(input.readlines()))
