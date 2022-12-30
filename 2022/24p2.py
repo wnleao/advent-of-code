@@ -1,5 +1,5 @@
 import input
-from collections import defaultdict
+from collections import defaultdict, deque
 from heapq import heappop, heappush
 
 
@@ -81,19 +81,25 @@ def forecast_blizzards(grid: list[str], max_y, max_x) -> list:
 def solve(grid: list[str]) -> int:
     max_y, max_x = len(grid)-1, len(grid[0])-1
     print('0. forecast blizzards...', max_y, max_x)
-    blizzards = forecast_blizzards(grid, max_y, max_x)
-    period = len(blizzards)
-    print(f'forecast period = {period}')
+    blizzards = deque(forecast_blizzards(grid, max_y, max_x))
     
     sy, sx = 0, 1
     gy, gx = max_y, max_x-1
-    
-    print(f'1. explore from {sy, sx} to {gy, gx}...')
+    total = 0
+    print(f'1. explore from {sy, sx} to {gy, gx} start time {total}...')
     minute = explore(sy, sx, gy, gx, max_y, max_x, blizzards)
+    blizzards.rotate(-minute)
+    total += minute
+    print(f'2. explore from {gy, gx} to {sy, sx} start time {total}...')
+    minute = explore(gy, gx, sy, sx, max_y, max_x, blizzards)
+    blizzards.rotate(-minute)
+    total += minute
+    print(f'3. explore from {sy, sx} to {gy, gx} start time {total}...')
+    minute = explore(sy, sx, gy, gx, max_y, max_x, blizzards)
+    total += minute
+    print(f'4. finished at minute {total}')
     
-    print(f'2. goal reached at minute {minute}')
-    
-    return minute
+    return total
 
 
 if __name__ == '__main__':
