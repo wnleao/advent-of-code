@@ -78,7 +78,25 @@ def forecast_blizzards(grid: list[str], max_y, max_x) -> list:
     return forecast
 
 
-def solve(grid: list[str]) -> int:
+def part1(grid: list[str]) -> int:
+    max_y, max_x = len(grid)-1, len(grid[0])-1
+    print('0. forecast blizzards...', max_y, max_x)
+    blizzards = forecast_blizzards(grid, max_y, max_x)
+    period = len(blizzards)
+    print(f'forecast period = {period}')
+    
+    sy, sx = 0, 1
+    gy, gx = max_y, max_x-1
+    
+    print(f'1. explore from {sy, sx} to {gy, gx}...')
+    minute = explore(sy, sx, gy, gx, max_y, max_x, blizzards)
+    
+    print(f'2. goal reached at minute {minute}')
+    
+    return minute
+
+
+def part2(grid: list[str]) -> int:
     max_y, max_x = len(grid)-1, len(grid[0])-1
     print('0. forecast blizzards...', max_y, max_x)
     blizzards = deque(forecast_blizzards(grid, max_y, max_x))
@@ -90,17 +108,22 @@ def solve(grid: list[str]) -> int:
     minute = explore(sy, sx, gy, gx, max_y, max_x, blizzards)
     blizzards.rotate(-minute)
     total += minute
+    
     print(f'2. explore from {gy, gx} to {sy, sx} start time {total}...')
     minute = explore(gy, gx, sy, sx, max_y, max_x, blizzards)
     blizzards.rotate(-minute)
     total += minute
+    
     print(f'3. explore from {sy, sx} to {gy, gx} start time {total}...')
     minute = explore(sy, sx, gy, gx, max_y, max_x, blizzards)
     total += minute
+    
     print(f'4. finished at minute {total}')
     
     return total
 
 
 if __name__ == '__main__':
-    print(solve(input.readlines()))
+    lines = input.readlines()
+    print('part1', part1(lines))
+    print('part2', part2(lines))

@@ -29,9 +29,9 @@ def to_snafu(dec: int) -> str:
     return ans
 
 
-def solve(content: list[str]) -> str:
+def part1(content: list[str]) -> str:
     return to_snafu(sum([to_decimal(line) for line in content]))
 
 
 if __name__ == '__main__':
-    print(solve(input.readlines()))
+    print(part1(input.readlines()))
