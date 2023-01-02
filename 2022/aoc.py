@@ -1,6 +1,6 @@
 
 
-def readlines():
+def load_input():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input',

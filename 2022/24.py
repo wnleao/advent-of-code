@@ -1,6 +1,7 @@
-import input
 from collections import defaultdict, deque
 from heapq import heappop, heappush
+
+import aoc
 
 
 def explore(sy, sx, gy, gx, max_y, max_x, blizzards):
@@ -124,6 +125,6 @@ def part2(grid: list[str]) -> int:
 
 
 if __name__ == '__main__':
-    lines = input.readlines()
+    lines = aoc.load_input()
     print('part1', part1(lines))
     print('part2', part2(lines))

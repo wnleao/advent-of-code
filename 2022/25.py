@@ -1,4 +1,4 @@
-import input
+import aoc
 
 # 2, 1, 0, minus (written -), and double-minus (written =)
 # minus = -1 and double-minus = -2
@@ -34,4 +34,4 @@ def part1(content: list[str]) -> str:
 
 
 if __name__ == '__main__':
-    print(part1(input.readlines()))
+    print(part1(aoc.load_input()))
